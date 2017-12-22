@@ -8,6 +8,7 @@ circumscriptions.append(["Barcelona", 85])
 circumscriptions.append(["Girona", 17])
 circumscriptions.append(["Lleida", 15])
 circumscriptions.append(["Tarragona", 18])
+#circumscriptions.append(["Catalunya", 135])
 elect.add_circumscriptions(circumscriptions)
 
 elect.add_party(party.party("JxCAT"))
@@ -26,6 +27,13 @@ votes["PSC"]   = {"Barcelona": 494693, "Girona":34969,  "Lleida":21618, "Tarrago
 votes["CComu"] = {"Barcelona": 274565, "Girona":16349,  "Lleida":9218,  "Tarragona": 23463}
 votes["PP"]    = {"Barcelona": 141803, "Girona":11476,  "Lleida":10839, "Tarragona": 19990}
 votes["CUP"]   = {"Barcelona": 142195, "Girona":21551,  "Lleida":12052, "Tarragona": 17554}
+#votes["JxCAT"] = {"Catalunya": 940602}
+#votes["ERC"]   = {"Catalunya": 929407}
+#votes["Cs"]    = {"Catalunya": 1102099}
+#votes["PSC"]   = {"Catalunya": 602969}
+#votes["CComu"] = {"Catalunya": 323695}
+#votes["PP"]    = {"Catalunya": 184198}
+#votes["CUP"]   = {"Catalunya": 193352}
 elect.update_votes(votes)
 
 elect.run_dHondt(debug=False)
@@ -36,13 +44,7 @@ elect.reset()
 elect.run_FractionCircumscriptions(debug=False)
 result_FractionCircumscriptions = str(elect)
 
-elect.reset()
-
-elect.run_FractionAll(debug=False)
-result_FractionAll = str(elect)
-
 elect.printCircumscriptions = False
 
 print result_dHondt
 print result_FractionCircumscriptions
-print result_FractionAll

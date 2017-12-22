@@ -8,7 +8,6 @@ class election(object):
         self.circumscriptionsList = []
 
         self.printCircumscriptions = False
-        self.printTotalIsCircumscriptions = False
 
 
 #______________________________________________________________________________________
@@ -30,10 +29,8 @@ class election(object):
 
         toprint += "Total:\n"
         for p in self.parties.keys():
-            if not self.printTotalIsCircumscriptions:
-                toprint += "  - " + self.parties[p].name + ": " + str(sumseats[p]) + "\n"
-            else:
-                toprint += "  - " + self.parties[p].name + ": " + str(self.parties[p].seats[self.parties[p].seats.keys()[0]]) + "\n"
+            toprint += "  - " + self.parties[p].name + ": " + str(sumseats[p]) + "\n"
+        toprint += "\n"
         return str(toprint)
 
 
@@ -98,27 +95,4 @@ class election(object):
                 sumVotesAll += self.parties[p].votes[name]
             for p in self.parties.keys():
                 self.parties[p].seats[name] = int(round(float(totalSeats)*float(self.parties[p].votes[name]/float(sumVotesAll)), 0))
-
-
-#______________________________________________________________________________________
-    def run_FractionAll(self, debug=False):
-        debugText = ""
-        sumVotesAll = 0
-        sumVotesParty = {}
-        totalSeatsAll = 0
-        self.printTotalIsCircumscriptions = True
-        for c in self.circumscriptionsList:
-            name = c[0]
-            totalSeatsAll += c[1]
-            for p in self.parties.keys():
-                sumVotesAll += self.parties[p].votes[name]
-                if p not in sumVotesParty.keys():
-                    sumVotesParty[p] = self.parties[p].votes[name]
-                else:
-                    sumVotesParty[p] += self.parties[p].votes[name]
-
-        for c in self.circumscriptionsList:
-            name = c[0]
-            for p in self.parties.keys():
-                self.parties[p].seats[name] = int(round(float(totalSeatsAll)*float(sumVotesParty[p])/float(sumVotesAll), 0))
 
